@@ -1,0 +1,9 @@
+Hi Team,
+I reviewed the NLU result and noticed a few gaps:
+Test coverage relies heavily on simple Yes/No utterances, which may inflate pass rates and does not adequately validate real user language variation. The Yes/No coverage itself is quite basic and lacks sufficient paraphrases, natural variations, compound responses, and realistic user expressions.
+I also found some test utterances that are not meaningful from an NLU validation perspective, such as <noUserInput> and random strings. These do not reflect realistic user behavior and provide limited value for intent-quality assessment.
+Repeat / AreYouHuman / AreYouBot scenarios were marked Pass based on intent match alone, but the bot response was not validated. In these cases, the bot did not actually demonstrate the expected behavior.
+Enroll, AnotherTime, MainMenu, add all, add none, and one at a time are not modeled or tested as separate intents, even though they represent distinct user actions and downstream flows.
+Multiple semantically different utterances (e.g., affirmation, enroll, defer/later) appear to be grouped under the same intent, creating intent overlap and ambiguity.
+Response validation was not performed. Pass criteria seem to be based solely on intent prediction, without validating expected response, dialog transition, or conversation state.
+Overall, the execution confirms intent-label matching, but it does not fully validate NLU behavior or conversational correctness. I would recommend improving utterance diversity, removing non-representative test inputs, separating overlapping intents, and incorporating response validation before considering the results complete

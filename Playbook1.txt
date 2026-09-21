@@ -1,0 +1,149 @@
+- Step 1 **identifying sub intents**
+    - If user utterance contains any question about medical benefits and coverage such as "medical benefits,"calling about medical benefits","question about medical benefits","vision benefits","vision benefit outlines","benefit information","benefit question","check benefits","review benefits","benefits inquiry","coverage question","verify coverage","preventive care coverage","flu shot coverage","healthcare service coverage","help with verify coverage","medicare part d", "verify benefits","confirm benefits"
+        - Set `$subIntent = "medical"`.
+    - If user utterance contains any question about dental benefits such as "dental benefits","dental benefits outlines","dental benefits informations"
+        - Set `$subIntent = "dental"`.
+    - If user utterance contains any question about vision benefits such as "vision benefits informations"
+        - Set `$subIntent = "vision"`.
+    - If user utterance contains any question about life benefits such as "life benefits","benefits life","calling about life benefits","question about life benefits","benefits life","disability benefits","I need help with group life benefits","help with life coverage","help with life insurance plan"
+        - Set `$subIntent = "benefitsLife"`.
+    - If user utterance contains any question about deductibles, benefits summaries, employee benefits, or SBC requests, such as "how much deductible has been met on two members","deductible amounts for the members","explanation on a drug deductible",deductible credits","insurance deductible","misinformation about deductible","plant deductible for existing group","report of contributions,"question about deductible applied","update deductible amount","deductible plan","employee group benefits","checking on employee benefits","employee benefits verification","group life insurance benefit","group plan benefits","benefit summary","summary of benefits and coverage (SBC)","plan summary","benefits summary","summary of coverage","summary of plan description","request benefit summary","get or need benefit summary","print benefit summary","dental or vision benefit summary","SBC request","s b c","sbc for plans"
+        - Set `$subIntent = "benefitsInquiry"`.
+    - If user utterance contains any question about authorization such as "i need help with authorization","question about authorization","looking for help with  authorization","calling regarding authorization","need assistance with authorization","i want information about authorization","help with authorization","authorization"
+        - Set `$subIntent = "authorization"`.
+    - If user utterance contains any question about coordination of benefits such as  "calling regarding  cob","need assistance with  cob","i want information about  cob","help with  cob","cob","coordination of benefits"
+        - Set `$subIntent = "cob"`.
+    - If user utterance contains any question about providersuch as "calling regarding provider","need assistance with provider","i want information about provider","help with provider","provider"
+        - Set `$subIntent = "provider"`.
+- Route to ${FLOW:Post Intent Detection}.
+
+
+
+- Step 1 **identifying sub intents**
+    - If the $user_utterance is related to employee management like changing, updating, reinstating or checking employee coverage status such as "employee inactive","activate employee insurance","activate employee","activating current employee","check on active employee","employees coverage not active","employees that were terminated are now active again","reactivate employee","update employee","change employee information","update employee information","employee correction","modify employee information","manage employee","add employee","remove employee","update employee status","member status","i need help with reinstate employee","calling about reinstate employee","i need help with new employee","calling about new member"
+        - Set $subIntent:employee
+    - If the $user_utterance is related to cancelling or closing account such as "cancel account","client account cancellation","close an account","notification of business closed","term group coverage","terminating group plan","termination of a policy i mean an account a group health plan"
+        - Set $subIntent:cancelAccount
+    - If the $user_utterance is related to coverage administration, including coverage changes, cancellations, reinstatements, verification, employee coverage inquiries, coverage certificates, or coverage-related issues such as "cancel coverage","terminate coverage","cancel insurance","drop insurance","change coverage","policy update","update plan","change plan","manage coverage","i need help with reinstating coverage","check employee coverage","report problem with insurance plan","problem with policy","member coverage","coverage issue","effective date coverage","verify coverage","I need certificate of coverage", "I'm looking for medicare certification","calling regarding proof of insurance","problem with coverage","I want to add and delete employee benefits for one of our employees,"I need to change an employee to cobra", "I want to update insurance for a member","help with request coverage certificate","need to change coverage for employee".
+        - Set $subIntent:eligibilityCoverage
+    - If the $user_utterance is related to personal, member, employee, or business information updates and corrections such as "i need to change a date of birth","my date of birth is wrong in the system","update name","name correction","change business name","update company name","correct name on policy","correct my name on invoice"
+        - Set $subIntent:changeDetails
+    - If the $user_utterance is related to dental eligibility, dental benefits eligibility, or qualification for dental coverage, such as "dental eligibility","Calling about dental benefits eligibility","I want information about eligible for dental"
+        - Set $subIntent:eligibility_dental
+    - If the $user_utterance is related to medical eligibility, medical benefits eligibility, or qualification for medical coverage, such as "medical eligibility","eligibility medical"
+        - Set $subIntent:eligibility_medical
+    - If the $user_utterance is related to vision eligibility, vision benefits eligibility, or qualification for vision coverage, such as "eligibility vision","vision eligibility"
+        - Set $subIntent:eligibility_vision
+    - If the $user_utterance is related to cobra such as "employee going on cobra","I want to activate cobra","cobra","cobra services","cobra benefits","cobra administration","cobra eligibility","cobra status","cobra end date","cobra billing question","cobra payment issue","cobra inquiry","update cobra payment","cobra rates","cobra quote","cobra form","cobra renewal","cobra extension","I need cobra cover","cobra issue","cobra contact number"
+        - Set $subIntent:enrollCobra
+    - If the $user_utterance is related to enrollment such as "life insurance late enrollment","need benefit","new insurance for a new company","plan purchase","policy sign up","purchase plan","question about h m o","add dependent","add newborn","add spouse","add employee","enroll new employee","check enrollment status","check application status","need to verify enrollment"
+        - Set $subIntent:enroll
+    - If the $user_utterance is related to group information, group status, member or policy identification, or waiting period inquiries, such as "annual group size request","group size survey","legally required group size request","aca group size request","need help with group size form","need group numbers","status of a group","canceled group incorrectly","group effective date","invalid group number","like to know the start date for my group","locate group id and member number","pending group","see if a group has termed", "member id number","employee id number","group id number","temporary id card","temp id","medical id card","id number request","id information","policy number","prescription policy number","group waiting period","check on waiting period","need to confirm new hire waiting period"
+        - Set $subIntent:inquireEligibility
+    - If the $user_utterance is related to reporting a denied coverage, denied plan, plan issue, or other plan-related problems, such as "denied coverage","employee was denied","denied benefits","errors on my insurance plan", "problem with plan"
+        - Set $subIntent:reportProblem
+    - If the $user_utterance is related to 1095, ten ninety five such as "ten ninety five","ten ninety five form","tax form ten ninety   five ten ninety five statement","i want information about 1095","1095"
+        - Set $subIntent:request1095
+    - If the $user_utterance is related to termination such as "i need help with terminating dependent","dropping dependent","canceling a dependent on group policy","cancel an employee coverage","terminate employee insurance","terminate my dependent","calling about termination","termination notice","termination of coverage notice", "problem with termination","cannot terminate employee"
+        - Set $subIntent:termination
+    - If the $user_utterance is related to eligibility processes, benefits eligibility, access requests, census information, continuation coverage, or qualifying life events, such as "i need help with access","calling about benefits eligibility","i need help with census","i need help with continuation","calling about qualifying event"
+        - Set $subIntent:eligibilityProcess
+    - If the $user_utterance is related to dependant such as "i need help with dependent","calling about dependent coverage","i have a question about dependent coverage","dependent concerns","dependent showing not eligible for coverage"
+        - Set $subIntent:eligibilityDependent
+    - If the $user_utterance is related to eligibility verification, eligibility status, eligibility enrollment, member eligibility, employee eligibility, or eligibility updates and changes such as "i need help with verify eligibility","I need help with eligibility","I need help with eligibility status","I need help with member eligibility","I want information about eligibility status",calling about eligibility enrollment","inquire eligibility","employee eligibility changes","i need to update a member's eligibility",
+        - Set $subIntent:eligibilityGeneral
+    - Route to ${FLOW:Post Intent Detection}
+	
+	
+	
+	
+	- Step 1 **identifying sub intents**",
+    - If user utterance contains any question about change account information,social security number, email,status and report a account problem such as "remove account contact","change an employee's information","update company profile","update contact information","update membership","update salary information","want to make change to subscriber","would like to change the account information on the united healthcare secure email","wrong social_security number","i want to confirm that we are my account is active","status of account","report problem account","account terminated",locked account","account disabled","account"
+        - Set `$subIntent = "accountInquiry"`.
+    - If user utterance contains any question about address,change address, change admin,change dependent information provider change and group information such as "change address","update employee address","update company address","update mailing address","change subscriber address","update employer address","transfer of administrator","change admin","admin change","dependent address","updating dependent information","manage group","receipt of group information update form","small group changes terminations","update group information","upgrade a group","primary care provider was changed","change dependents physician","p c p change","update primary care physician","help with address","address","group info"
+        - Set `$subIntent = "changeDetails"`.
+    - If user utterance contains any question about request for mailing address such as "request address","mailing address"
+        - Set `$subIntent = "requestAddress"`.
+    - If user utterance contains any question about request for contact information such as "i want information about contact info","help with contact info","request contact info"
+        - Set `$subIntent = "requestContactInfo"`.
+    - If user utterance contains any question about respond letter,notice,received email and any request to return a missed call or follow up on a previous call such as "respond letter","I'm returning a call","check on return call","I received a voicemail","I got disconnected and I'm calling back","call back request","received a notice","email received"
+        - Set `$subIntent = "agentCorrespondence"`.
+    - If user utterance is something else such as "looking for something else","something else"
+        - Set `$subIntent = "somethingElse"`.
+    - If user utterance contains any question about employee termination else such as "help with terminate employee","terminate employee","accidentally terminated an employee","correct the termination date","termination correction"
+        - Set `$subIntent = "terminateEmployee"`.
+    - If the user_utterance is related to "help with appointment","appointment","group life and short term disability question","life and disability","long term disability waiver of premium","long term short term disability","employee","inquire","membership","problem","service","status","help with tax","tax",
+        - Set `$subIntent = "agentGeneral"`.
+    - Route to ${FLOW:Post Intent Detection}
+	
+	
+	
+	
+	- Step 1 **identifying sub intents**
+    - If user utterance contains any question about claims dental such as "claims dental","dental claims","dental claim question"
+        - Set `$subIntent = "claimsDental"`.
+    - If user utterance contains any question about vision claims such as "claims vision","vision claims","vision claims question"
+        - Set `$subIntent = "claimsVision"`.
+    - If user utterance contains any question about report problem claim such as "regarding report problem claim","assistance with report problem claim","information about report problem claim","help with report problem claim","report problem claim"
+        - Set `$subIntent = "reportProblem"`        .
+    - If user utterance contains any question about claims, claim appeals, claim disabilities, medical claims or claim status,such as "calling regarding claim","claim","inquire claim benefits",,"calling regarding claim appeal","need assistance with claim appeal","claim appeal","calling regarding claim disability","need assistance with claim disability","help with claim disability","claim disability","calling regarding claim medical","need assistance with claim medical","claim medical","check status of medical claim","status of claim","update on a claim"
+        - Set `$subIntent = "claimsGeneral"`.
+    - Route to ${FLOW:Post Intent Detection}.
+	
+	
+	
+	- Step 1 **identifying sub intents**
+    - If the user_utterance is related to commissions, commission statements, licensing information, licensing updates, or licensing inquiries, such as "I would like to get a copy of my commission statements","how do I print commission statement","we have not received the commission statements since last year","I need to speak with commissions","inquiring about commission" "check on my licensing appointment","licensing an appointment","license information","updating licenses"
+        - Set $headIntent:brokerCommissions
+        - Set $subIntent:inquireCommission
+    - If the user_utterance is related to aor such as "aor", "I need help with aor","I want information about aor"
+        - Set $headIntent:brokerCommissions
+        - Set $subIntent:aor
+    - If the user_utterance is related to contract such as "I need help with contract","I want information about contract","contract"
+        - Set $headIntent:brokerCommissions
+        - Set $subIntent:contract
+    - If the user_utterance is related to enrollment, open enrollment, enrollment changes, or enrollment-related issues, such as "open enrollment","need to switch plans for open enrollment","i need help with report problem enrollment", "calling about enrollment","I need help with enrollment changes","I want information about enrollment changes","enrollment changes"
+        - Set $headIntent:enrollment
+        - Set $subIntent:inquireEnrollment
+    - If the user_utterance is related to employer online services, online portals, user management, technical support, eServices, or general online account assistance, such as "I need help with web support","calling about employer online services","I have a question about employer portal","calling about manage users","I want information about manage users","help with manage users","manage users", "I need tech support","eservice", "portal access"
+        - Set $headIntent:eServices
+        - Set $subIntent:techSupport
+    - If the user_utterance is related to requesting a card, ID card assistance, replacement cards, or general card inquiries, such as "request card","order card","request card id","I need help with id card","id card", "temporary id card","membership card"
+        - Set $headIntent:idCard
+        - Set $subIntent:idCardRequest
+    - If the user_utterance is related to password assistance, password resets, login issues, account access problems, eServices access, or general sign-in support, such as "password assistance","password reset help_desk","reset my password","problem loggin in","I need help with eservices access","login","cannot login"
+        - Set $headIntent:password
+        - Set $subIntent:accountAccess
+    - If the user_utterance is related to pharmacy claims, prescription coverage, pharmacy benefits verification, pharmacy-related issues, or general prescription assistance, such as "prescription claim","pharmacy claim","verify pharmacy benefits","prescription coverage","pharmacy help","r_x plan code"
+        - Set $headIntent:prescriptions
+        - Set $subIntent:pharma
+    - If the user_utterance is related to requesting a quote, obtaining pricing information, or quote-related inquiries, such as "calling regarding a quote","request quote"
+        - Set $headIntent:renewals
+        - Set $subIntent:requestQuote
+    - If the user_utterance is related to renewals, policy renewals, plan renewal dates, renewal inquiries, or the renewal process, such as "i need help with renewals","inquire about renewals","I have a question about renewals","I have a question about plan renewal date","I want information about renewal process"
+        - Set $headIntent:renewals
+        - Set $subIntent:inquireRenewals
+    - If the user_utterance is related to sales such as "inquire sales","sales"
+        - Set $headIntent:sales
+        - Set $subIntent:inquireSales
+    - Route to ${FLOW:Post Intent Detection}.
+	
+	
+	- Step 1 **identifying sub intents**
+    - If user utterance contains any question related to autopay changes, bank account updates, billing updates, statements, bill corrections, such as "change autopay","change auto payment","change bank account","update banking information","change payment method","update billing account","change billing","statement","statement rebilled","change on my bill","correct my bill","question about setup autopay","calling regarding setup autopay","need assistance with setup autopay","setup autopay","automatic payment","auto pay","direct debit","direct deposit","ach payment","automatic withdrawal","setup automatic payment","schedule direct debit","update automatic payment","check automatic payment status","payment not deducted","turn off automatic payment",
+        - Set `$subIntent = "autoPayment"`.
+    - If user utterance contains any question related to balance,billing,credit,mlr, notice overdue and preventive care such as "questioning my current bill","questions about the bill","what's my balance","balance","account balance","check balance","balance due","balance information","balance on account","outstanding balance","what's my balance","billing","billing question", "invoice question","billing question","review invoice","check invoice","retrieve invoice","statement question","check statement balance","billing charges question","invoice discrepancy","why is my bill different","why am i being billed","final credit balance","missing credits","question about newborn credit","questionregarding a credit due to us","we have a credit on our total balance due","medical loss ratio" ,"affordable care act and medical loss ratio","mlr","mlr calculation","mlr ratio","m l r rebate","m l r refund check","question on recent letter relative to m l r calculation","inquire related notice overdue","late notice","i got an overdue notice","past due notice","late notice from united healthcare","we received a late notice","overdue notice","employee is being charged for a preventative service","preventative care","preventative supplies"
+        - Set `$subIntent = "billingInquiry"`
+    - If user utterance contains any question about referral such as "referral","referral status","checking if referral is needed"
+        - Set `$subIntent = "inquireReferral"`.
+    - If user utterance contains any question about refund such as "refund request","request refund","refund status","check refund","refund on account","premium refund","billing refund","reimbursement request","reimbursement status","rebate inquiry","rebate question","need refund"
+        - Set `$subIntent = "inquireRefund"`.
+    - If user utterance contains any question about make payment, make payment bill,make payment online,make payment by phone, make payment premium,payment status and transactions such as "make payment","make payment bill","make payment online","calling about make payment online","looking for help with make payment online","need assistance with make payment online","make payment phone","make payment via phone","make payment reinstate","pay a past due balance","i need to make a payment"","bill payments","need to pay a bill","payment of invoice"","can pay invoice online","e-services payment","regarding online payment of premium"","pay invoice by phone","make a payment on phone","phone payment"","account premium payment","employee premium pay","premium premium payment","inquire payment status","check payment status","verify payment","confirm payment","payment status","payment confirmation","check payment","payment received","check if payment received","verify payment receipt","check payment processing","need to check payment","confirm payment received","question about check payment","recent transactions","recent transaction","transactions","no transaction","recent transaction with a group","transaction history"
+        - Set `$subIntent = "makePayment"`.
+    - If user utterance contains any question about billing problems or payment problems such as "report problem billing","billing discrepancy","billing problem","did not receive invoice","issue related to statements","report problem payment","cancel payment","can't make payment","double paid invoice"
+        - Set `$subIntent = "reportProblem"`.
+    - If user utterance contains any question about request payment adddress or bill copy request such as "request address for payment","address for payment","address for payment of dental and vision","i need a mailing address for payment","copy of an invoice","i need a copy of an invoice","i'd like to get paper bills","bill copy"
+        - Set `$subIntent = "billingDocumentRequest"`.
+    - If user utterance contains any question about "bill pay","billing","billing access","billing eligibility","billing enrollment","check","payment","premium","reinstate", such as "question about bill pay","bill pay","billing","calling regarding billing access","billing access","need assistance with billing eligibility","billing eligibility","help with billing enrollment","billing enrollment","calling regarding check","check","assistance with payment","payment","need assistance with premium","information about premium","premium","need assistance with reinstate","reinstate"
+        - Set `$subIntent = "generalBilling"`.
+    - Route to ${FLOW:Post Intent Detection}.
